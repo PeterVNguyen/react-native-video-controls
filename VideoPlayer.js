@@ -888,7 +888,7 @@ export default class VideoPlayer extends Component {
       ? require('./assets/img/volume-mute.png')
       : require('./assets/img/volume-low.png');
     return this.renderControl(
-      <Image source={source} />,
+      <Image source={source} style={{width: 15, height: 15}} />,
       this.methods.toggleMute,
       styles.volume.icon,
     );
@@ -1003,7 +1003,7 @@ export default class VideoPlayer extends Component {
           },
         ]}>
         <TouchableOpacity onPress={this.methods.togglePlayPause}>
-          <Image source={source} />
+          <Image source={source} style={{height: 30, width: 30}} />
         </TouchableOpacity>
       </Animated.View>
     );
