@@ -885,8 +885,8 @@ export default class VideoPlayer extends Component {
 
   renderVolume() {
     let source = this.state.muted
-      ? require('./assets/img/volume.png')
-      : require('./assets/img/pause.png');
+      ? require('./assets/img/volume-mute.png')
+      : require('./assets/img/volume-low.png');
     return this.renderControl(
       <Image source={source} />,
       this.methods.toggleMute,
