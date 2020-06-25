@@ -9,7 +9,6 @@ import {
   StyleSheet,
   Touchable,
   Animated,
-  SafeAreaView,
   Easing,
   Image,
   View,
@@ -963,10 +962,10 @@ export default class VideoPlayer extends Component {
           source={require('./assets/img/top-vignette.png')}
           style={[styles.controls.column]}
           imageStyle={[styles.controls.vignette]}>
-          <SafeAreaView style={styles.controls.topControlGroup}>
+          <View style={styles.controls.topControlGroup}>
             {backControl}
             <View style={styles.controls.pullRight}>{fullscreenControl}</View>
-          </SafeAreaView>
+          </View>
         </ImageBackground>
       </Animated.View>
     );
@@ -1066,11 +1065,11 @@ export default class VideoPlayer extends Component {
           ]}
           imageStyle={[styles.controls.vignette]}>
           <View style={{width: '80%'}}>{seekbarControl}</View>
-          <SafeAreaView style={[styles.controls.bottomControlGroup]}>
+          <View style={[styles.controls.bottomControlGroup]}>
             {/**{ this.renderTitle() } */}
             {timerControl}
             {volumeControl}
-          </SafeAreaView>
+          </View>
         </ImageBackground>
       </Animated.View>
     );
