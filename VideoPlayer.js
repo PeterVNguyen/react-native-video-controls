@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   PanResponder,
+  SafeAreaView,
   StyleSheet,
   Touchable,
   Animated,
@@ -958,15 +959,17 @@ export default class VideoPlayer extends Component {
             marginTop: this.animations.topControl.marginTop,
           },
         ]}>
-        <ImageBackground
-          source={require('./assets/img/top-vignette.png')}
-          style={[styles.controls.column]}
-          imageStyle={[styles.controls.vignette]}>
-          <View style={styles.controls.topControlGroup}>
-            {backControl}
-            <View style={styles.controls.pullRight}>{fullscreenControl}</View>
-          </View>
-        </ImageBackground>
+        <SafeAreaView>
+          <ImageBackground
+            source={require('./assets/img/top-vignette.png')}
+            style={[styles.controls.column]}
+            imageStyle={[styles.controls.vignette]}>
+            <View style={styles.controls.topControlGroup}>
+              {backControl}
+              <View style={styles.controls.pullRight}>{fullscreenControl}</View>
+            </View>
+          </ImageBackground>
+        </SafeAreaView>
       </Animated.View>
     );
   }
@@ -1135,7 +1138,7 @@ export default class VideoPlayer extends Component {
           },
         ]}>
         <TouchableOpacity onPress={this.methods.togglePlayPause}>
-          <Image source={source} style={{height: 30, width: 30}} />
+          <Image source={source} style={{height: 30, width: 30, zIndex: 1}} />
         </TouchableOpacity>
       </Animated.View>
     );
