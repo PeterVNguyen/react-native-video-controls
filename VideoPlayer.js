@@ -495,7 +495,9 @@ export default class VideoPlayer extends Component {
   _togglePlayPause() {
     // if hideing, return
     let {opacity} = this.animations.topControl;
-    if (opacity._value === 0) return;
+    if (opacity._value === 0) {
+      return;
+    }
 
     let state = this.state;
     state.paused = !state.paused;
@@ -1089,7 +1091,7 @@ export default class VideoPlayer extends Component {
         {...this.player.seekPanResponder.panHandlers}>
         <View
           style={styles.seekbar.track}
-          onLayout={(event) =>
+          onLayout={event =>
             (this.player.seekerWidth = event.nativeEvent.layout.width)
           }
           pointerEvents={'none'}>
@@ -1178,6 +1180,9 @@ export default class VideoPlayer extends Component {
    * Show loading icon
    */
   renderLoader() {
+    const playPauseControl = this.props.disablePlayPause
+      ? this.renderNullControl()
+      : this.renderPlayPause();
     if (this.state.loading) {
       return (
         <View style={styles.loader.container}>
@@ -1200,7 +1205,7 @@ export default class VideoPlayer extends Component {
         </View>
       );
     }
-    return null;
+    return playPauseControl;
   }
 
   renderError() {
@@ -1233,7 +1238,7 @@ export default class VideoPlayer extends Component {
         <View style={[styles.player.container, this.styles.containerStyle]}>
           <Video
             {...this.props}
-            ref={(videoPlayer) => (this.player.ref = videoPlayer)}
+            ref={videoPlayer => (this.player.ref = videoPlayer)}
             resizeMode={this.state.resizeMode}
             volume={this.state.volume}
             paused={this.state.paused}
@@ -1251,7 +1256,6 @@ export default class VideoPlayer extends Component {
           {this.renderError()}
           {this.renderTopControls()}
           {this.renderLoader()}
-          {playPauseControl}
           {this.renderBottomControls()}
         </View>
       </TouchableWithoutFeedback>
