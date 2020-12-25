@@ -941,40 +941,6 @@ export default class VideoPlayer extends Component {
    * Groups the top bar controls together in an animated
    * view and spaces them out.
    */
-  renderTopControls() {
-    const backControl = this.props.disableBack
-      ? this.renderNullControl()
-      : this.renderBack();
-    const volumeControl = this.props.disableVolume
-      ? this.renderNullControl()
-      : this.renderVolume();
-    const fullscreenControl = this.props.disableFullscreen
-      ? this.renderNullControl()
-      : this.renderFullscreen();
-
-    return (
-      <Animated.View
-        style={[
-          styles.controls.top,
-          {
-            opacity: this.animations.topControl.opacity,
-            marginTop: this.animations.topControl.marginTop,
-          },
-        ]}>
-        <SafeAreaView>
-          <ImageBackground
-            source={require('./assets/img/top-vignette.png')}
-            style={[styles.controls.column]}
-            imageStyle={[styles.controls.vignette]}>
-            <View style={styles.controls.topControlGroup}>
-              {backControl}
-              <View style={styles.controls.pullRight}>{fullscreenControl}</View>
-            </View>
-          </ImageBackground>
-        </SafeAreaView>
-      </Animated.View>
-    );
-  }
 
   /**
    * Back button control
@@ -1091,7 +1057,7 @@ export default class VideoPlayer extends Component {
         {...this.player.seekPanResponder.panHandlers}>
         <View
           style={styles.seekbar.track}
-          onLayout={event =>
+          onLayout={(event) =>
             (this.player.seekerWidth = event.nativeEvent.layout.width)
           }
           pointerEvents={'none'}>
@@ -1212,11 +1178,11 @@ export default class VideoPlayer extends Component {
     if (this.state.error) {
       return (
         <View style={styles.error.container}>
-          <Image
+          {/* <Image
             source={require('./assets/img/error-icon.png')}
             style={styles.error.icon}
           />
-          <Text style={styles.error.text}>Video unavailable</Text>
+          <Text style={styles.error.text}>Video unavailable</Text> */}
         </View>
       );
     }
@@ -1238,7 +1204,7 @@ export default class VideoPlayer extends Component {
         <View style={[styles.player.container, this.styles.containerStyle]}>
           <Video
             {...this.props}
-            ref={videoPlayer => (this.player.ref = videoPlayer)}
+            ref={(videoPlayer) => (this.player.ref = videoPlayer)}
             resizeMode={this.state.resizeMode}
             volume={this.state.volume}
             paused={this.state.paused}
@@ -1254,7 +1220,6 @@ export default class VideoPlayer extends Component {
             source={this.props.source}
           />
           {this.renderError()}
-          {this.renderTopControls()}
           {this.renderLoader()}
           {this.renderBottomControls()}
         </View>
@@ -1348,11 +1313,6 @@ const styles = {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-    },
-    top: {
-      flex: 2,
-      alignItems: 'stretch',
-      justifyContent: 'flex-start',
     },
     bottom: {
       alignItems: 'stretch',
